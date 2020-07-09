@@ -3,10 +3,15 @@ Thoughts on best practices for code review
 
 ## Size of each code review
 Generally a code review is being made before committing a code change.
-
+Therefore the size of the code change to be committed and reviewed should not be greater than that it can be somewhat easily absorbed and understood by someone using the version history to understand a piece of code that they are currently working on.
+Also, to minimize the error of the code reviewer as it comes to finding bugs or code quality flaws the size of the change should not exceed a certain level.
+Typically the recommendation here is to never review more than 400 SLOC at a time.
+That is, neither should the size of the commit be larger than 400 SLOC.
 
 ## Hot vs Cold Code Reviews
-In a hot code review, 
+Hot code reviews are code reviews carried out by the reviewer and the author of the code sitting together.
+Hot code reviews therefore are 
+A _hot_ review preferred between juniors and seniors, and between juniors and juniors. the lack of experience can be 
 
 Cold code review, 
 
@@ -35,10 +40,10 @@ Exception-safety is an important property of your code. It makes your code more 
 
 - Destructors and overloads of operator delete and delete[] should NEVER throw. Make sure functions called also don't throw!
 - Exception-neutrality: all exceptions thrown should be either handeled locally, or be rethrown to client code to be handeled by the client code.
-- Exception-safety: non-, basic, strong.
+- Exception-safety: non-safe, basic, strong, nothrow. 
 
 ## Thread-safety
-The C++ memory model is multi-threaded since C++11. When designing a public interface thread-safety has to be considered.
+The C++ memory model is multi-threaded since C++11, i.e. the free lunch is over. When designing a public interface thread-safety has to be considered.
 
 ## Constexpr and templatization
 - Can parts of the code change be made constexpr? This will make it more extensible as it can be used at compile time as well.
